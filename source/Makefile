@@ -1,11 +1,11 @@
 CPPFLAGS = -std=c++11
-SRCS = main.cpp risk_WTH.cpp risk_BMI.cpp risk_BFP.cpp
-OBJS = main.o
+SRCS = main.cpp risk_WTH.cpp
+OBJS = main.o risk_WTH.o
 DEPS = $(SRCS:.cpp=.d)
 
-all: HealthCheck_WTH.exe HealthCheck_BMI.exe HealthCheck_BFP.exe
+all: HealthCheck.exe
 
-HealthCheck_%.exe: $(OBJS) risk_%.o
+HealthCheck.exe: $(OBJS)
 	g++ -o $@ $(CPPFLAGS) $^
 
 %.o: %.cpp
@@ -14,7 +14,7 @@ HealthCheck_%.exe: $(OBJS) risk_%.o
 -include $(DEPS)
 
 clean:
-	rm -f *.o *.exe *.d
+	del *.o *.exe *.d
 # On Windows, use: del *.o *.exe *.d
 # On Linux or MacOS, use: rm -f *.o *.exe *.d
 
