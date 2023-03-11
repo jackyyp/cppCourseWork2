@@ -28,7 +28,7 @@ class Word
         */
 
         Word(const char* s, int f = 1,int& r = global ,char g = 'E') : lang(g), FREQ(f),ref(r) 
-        { cout<<"Word conversion for "<<g<<endl; str = new char [strlen(s)+1]; strcpy(str, s); }
+        { cout<<"Word conversion for "<< s <<endl; str = new char [strlen(s)+1]; strcpy(str, s); }
 
         //delegating constructor: using the constructor defined above
         
@@ -51,7 +51,9 @@ class Word
         public:
             //MIL , we use their own constructor to initalize the private object
             // Word(cosnt char*,int) , Word(const char*,int=0)
+            WordPair(const Word& _w1 ,const Word& _w2) : w1(_w1), w2(_w2) {cout << " wp default"<<endl;}
             WordPair(const char* s1, const char* s2) : w1(s1,5), w2(w1) {cout<<"wp conversion" <<endl;} 
+
             ~WordPair(){cout<<"wp destructor"<<endl;};
 
             void print() const { w1.print(); w2.print(); }             
@@ -67,11 +69,15 @@ class Word
  int main(){
     const char* s1 = "hello";
     const char* s2 = "world";
+  
+    Word w1 {"hi"};
+    Word w2 {"there"};
+    
+    
+    WordPair wp {w1,w2};
+    print_word(); // destructor is called when the local word obj is out of scope(function)
 
-    WordPair wp {s1,s2};
-
-    print_word();
-
+    int* leak = new int[5];
 
     wp.print();   
     return 0;
