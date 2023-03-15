@@ -28,9 +28,9 @@ void Swiss::play(){
         
         //Create an array of PlayerList, where each list consists of all players with the same score.
         int numscore = 2*this->curRound-1;
-        PlayerList** split = new PlayerList* [numscore]; // delete every playlist* later, Playerlist have its own destructor.
+        PlayerList** split = new PlayerList* [numscore]; // delete every playlist* later, Playerlist have its own destructor???
 
-        //**dont forget to allocate memory...
+        //**dont forget to allocate memory... // it owns the playerlist! (Playerlist ptr*)
         for(int i=0;i<numscore;i++){
             split[i] = new PlayerList;
         }
@@ -54,14 +54,11 @@ void Swiss::play(){
         for(int j=numscore-1;j>=0;j--){
             //is empty
             if(split[j]->getNumPlayers()==0){continue;}
-            
-            split[j]->sort(); //as score changed.
-           
-        
+
+            split[j]->sort(); //as score changed.           
 
             int numPlayerInSplit =  split[j]->getNumPlayers();
   
-
             for(int k=0;k<numPlayerInSplit/2;k++){
                 //construct match
                 Match match {split[j]->getPlayer(k),split[j]->getPlayer((numPlayerInSplit/2)+k)};
@@ -76,18 +73,26 @@ void Swiss::play(){
                 }
                 else{
                     //append at top of next split
-                   split[j-1]->addPlayer(split[j]->getPlayer(numPlayerInSplit-1));
+                    split[j-1]->addPlayer(split[j]->getPlayer(numPlayerInSplit-1));
                 }
             }
-
+  
         }
 
         //Sort the list after all matches have been played, then call printLeaderboard().
         this->list.sort();
         this->printLeaderboard();
         this->curRound++;
+        //Delete any memory dynamically allocated in the loop.    
 
-        //Delete any memory dynamically allocated in the loop.
+        //you are inside the function, there !!!!
+
+        // thats why we have memory leak
+        for(int i=0;i<numscore;i++){
+           delete split[i];
+        }
+
         delete[] split;
+        split = nullptr;    
     }
 }

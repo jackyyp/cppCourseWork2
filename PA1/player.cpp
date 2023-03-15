@@ -8,8 +8,7 @@ Player::Player(const char* const name, const int elo){
     std::strcpy(this->name, name);
 
     //score should be initialized to 0
-    this->score = 0;
-    
+    this->score = 0;    
     //elo is player input.
     this->elo = elo;
 }
@@ -22,7 +21,6 @@ Player::~Player(){
 
 //sets the number of players to 0 and assign nullptr to the players array. 
 PlayerList::PlayerList(): numPlayers(0), players(nullptr){};
-
 
 //The copy constructor allocates memory for the players array and copy data from the passed list to the new array.
 PlayerList::PlayerList(const PlayerList& list){
@@ -41,7 +39,6 @@ PlayerList::~PlayerList(){
 }
 
 //Task 3: Implement the following 3 functions
-
 
 //This function adds a Player pointer to end of the list. 
 //You will need to handle the dynamically allocated array correctly, increase its size by allocating a new array if necessary.
@@ -111,14 +108,10 @@ void PlayerList::sort(){
                 this->players[j+1] = temp;
 
                 temp = nullptr;
-
                    //  1* 1 3 -> 1* 3 1 - > 3 1* 1 , elo order preserved.
                 j--;
             }
-
         }
-    
-
     return;
 }
 
