@@ -1,4 +1,4 @@
-CPPFLAGS = -std=c++11
+CPPFLAGS = -std=c++11 -fsanitize=address
 SRCS = main.cpp Point.cpp PointSet.cpp
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)

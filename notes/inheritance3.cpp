@@ -18,11 +18,31 @@ class Derived : public Base {
         Derived(): y(2) {cout << "Derived()\n";}
     protected:
         virtual void print() const override {cout << "Derived::print(),y=" << y <<endl;}
+        //calling this protected class member is possible with overriding.
 };
 
 int main(){
     Derived derived;
-    Base* baseptr = &derived;
+    Base base;
 
-    baseptr->print(); // calling Derived::print()
+    Base* baseptr = &derived;
+    cout<< typeid(*baseptr).name()<<endl; //the obj is derived
+    baseptr->print(); // calling Derived::print() through overriding.
+
+    Derived* dptr = &derived;
+     cout<< typeid(*dptr).name()<<endl; //the obj is derived
+    //dptr->print(); //cannot , becuase inaccessible by protected.
+
+
+    
+    Base* baseptr2 = &base;
+    baseptr2->print();
+
+
+
+    
+
+
+    
+
 }

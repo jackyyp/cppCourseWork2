@@ -29,7 +29,7 @@ class Base{
     public:
         Base(): x(1) {cout << "Base()\n";}
 
-        virtual void f() const {cout << "Base::f(),x ="<< x <<endl;}
+        virtual void f() const {cout << "Base::f(),x ="<< x <<endl;} //polymorphism
 
         void g() const {cout << "Base::g()"<<endl;}
 };
@@ -48,23 +48,35 @@ int main(){
     Derived derivedobj;
 
     
-
+    baseobj = derivedobj; //slicing
     Base base1 = static_cast<Base>(derivedobj);
-   // Base base2 = dynamic_cast<Base>(derivedobj); // not ok , only ptr or ref for dynamic
+    base1.g();
 
-    Base* baseptr1 = static_cast<Base*>(&derivedobj);
-    Base* baseptr2 = dynamic_cast<Base*>(&derivedobj); //RTTI : base
-    Base* baseptr3 = &derivedobj; //base
+   // Base base2 = dynamic_cast<Base>(derivedobj); // not ok , only ptr or ref for dynamic cast 
 
-    // cout << typeid(baseptr1).name() <<endl;
-    // cout << typeid(baseptr2).name() <<endl;
-    // cout << typeid(baseptr3).name() <<endl;
-    
-    Derived* derivedptr1 = static_cast<Derived*>(&baseobj);
-    Derived* derivedptr2 = dynamic_cast<Derived*>(&baseobj);
+    Base* baseptr1 = static_cast<Base*>(&derivedobj); //RTTI: base* to derived
+    Base* baseptr2 = dynamic_cast<Base*>(&derivedobj); //RTTI : base* , obj is derived
+    Base* baseptr3 = &derivedobj; //base* to derived
 
-    // cout << typeid(derivedptr1).name() <<endl;
-    // cout << typeid(derivedptr2).name() <<endl;
+    // cout << typeid(*baseptr1).name() <<endl;
+    // cout << typeid(*baseptr2).name() <<endl;
+    // cout << typeid(*baseptr3).name() <<endl;
+    // cout <<endl;
+
+
+
+    //static cast wont check in runtime (if its successful)
+    Derived* derivedptr1 = static_cast<Derived*>(&baseobj); //ok. you may know what you are doing
+
+    Derived* derivedptr2 = dynamic_cast<Derived*>(&baseobj);//nullptr, incomplete conversion 
+    // warning:  base to derived can never suceed
+    Base* derivedptr3 = dynamic_cast<Derived*>(&baseobj); //nullptr, incomeplete conversion from base to derived 
+
+    cout <<endl;
+
+     cout << typeid(*derivedptr1).name() <<endl;
+    // cout << typeid(*derivedptr2).name() <<endl; //
+     //cout << typeid(*derivedptr3).name() <<endl;
 
     //if base not polymorphic: not ok
     //if polymorphic : ok 
@@ -73,10 +85,22 @@ int main(){
     // i.e dynamic_cast return nullptr
 
     derivedptr1->g();
+    if(derivedptr1==nullptr){ //not 
+        cout<<"null"<<endl;
+    }
 
     if(derivedptr2==nullptr){
         cout<<"null"<<endl;
     }
+
+    derivedptr2->g();
+
+
+    if(derivedptr3==nullptr){
+        cout<<"null"<<endl;
+    }
+    
+    
 
 
 }

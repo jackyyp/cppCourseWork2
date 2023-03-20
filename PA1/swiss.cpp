@@ -84,7 +84,7 @@ void Swiss::play(){
         this->printLeaderboard();
         this->curRound++;
         //Delete any memory dynamically allocated in the loop.    
-
+        
         //you are inside the function, there !!!!
 
         // thats why we have memory leak
