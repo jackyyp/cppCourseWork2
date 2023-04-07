@@ -1,4 +1,4 @@
-CPPFLAGS = -std=c++11
+CPPFLAGS = -std=c++11 
 SRCS = main.cpp filter.cpp handler.cpp legoGPT.cpp array.cpp
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(OBJS:.o=.d)

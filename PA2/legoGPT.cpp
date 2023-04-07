@@ -82,11 +82,14 @@ void LegoGPT::chat(string topic, string question) const
 //We need to slice the humor to both FilterModule and HandlerModule. Load them into LegoGPT.
 void LegoGPT::LoadHandlerModule(HandlerModule &input){
     
-  
-    handlerMap.insert(input.getTopic(),&input);
-    topics.insert(input.getTopic()); //must not be language if its handler
-
+   
+   //topic is key
+   
+    string topic = input.getTopic();
     
+    handlerMap.insert(topic,&input);
+    topics.insert(topic); //array of key
+
 }
 
 //FilterModule:
@@ -103,17 +106,15 @@ void LegoGPT::LoadHandlerModule(HandlerModule &input){
 // }
 
 void LegoGPT::LoadFilterModule(FilterModule &input){
-   
+    // the input maybe a inherited object 
+    filterArray.insert(&input);
     string key = getFilterType(input.getType()); //"language"
 
     if(key=="language"){
-        languages.insert(input.getName());
-    }else{//not language , maybe "tone"
-        topics.insert(input.getName());
+        languages.insert(input.getName()); 
     }
-
-    filterArray.insert(static_cast<FilterModule*>(&input));
-
+//It doesn't have to be a language filter module to be loaded. Load filter of other types but don't include the name into languages.
+    
 
     
 }

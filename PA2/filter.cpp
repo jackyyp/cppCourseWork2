@@ -29,18 +29,20 @@ void FilterModule::trainPostData(const string &source, const string &target){
 
 //chain :
 //humor.trainPostData("3 + 5 = 8", "I don't know what is 3 + 5, but I know 3 + 5 = 5 + 3. 
-//artian.trainPostData("I don't know what is 3 + 5, ", "vzfdahfqe"
+//martian.trainPostData("I don't know what is 3 + 5, ", "vzfdahfqe"
 
 
 string FilterModule::translatePreData(string question) const{
 
-    string result = preData.find(question); //datamap
+    string translated;
+    translated= preData.find(question);
 
-    if(result!=""){ //not found
-        return result; //do nothing, its original?
+    if(translated==""){ //not found
+        return question; //do nothing
+    }else{
+        return translated;
     }
 
-    return question;
     
 } 
 
@@ -48,13 +50,16 @@ string FilterModule::translatePreData(string question) const{
 string FilterModule::translatePostData(string question) const{
 
     // ASSERT input is actually answer, not question.
-    string result = postData.find(question);
+    string translated;
+    translated= postData.find(question);
 
-    if(result!=""){ //found
-        return result; //return translated
+    if(translated==""){ //not found
+        return question; //do nothing
+    }else{
+        return translated;
     }
 
-    return question; //return original
+
 }
 
 
@@ -78,9 +83,10 @@ void FilterArray::insert(FilterModule *input){
     }
     temp[arraySize - 1] = input;
     
-    //**memory leak??
+ 
     delete[] array;
     array = temp;
+
     return;
 }
 

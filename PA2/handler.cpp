@@ -26,16 +26,9 @@ void HandlerModule::print() const {
 //Todo 3: Implement "trainData" and "answer" function of "HandlerModule".
 
 
-// Firstly, it passes the question to the language filter if languageFilter is not a nullptr.
-// Secondly, it passes the "translated" question to the tone filter if toneFilter is not a nullptr.
-// Thirdly, it queries the inneranswer function, which find the answer within its own data.
-// If it cannot find any answer, it simply replies "Sorry, I don't know".
-// Fourthly, it passes the answer to the tone filter if toneFilter is not a nullptr.
-// Lastly, it passes the answer to the language filter if languageFilter is not a nullptr.
 
-// Note that even if toneFilter is not a nullptr, it may still does nothing to your question or answer. 
-//For example, a "humor" filter will only change the tone for your answer, not the question. 
-//In the end, we aim to "ask a math joke in a foreign language, and get the reply also in foreign language".
+
+
 
 //  void trainPreData(const string &source, const string &target);
 //  void trainPostData(const string &source, const string &target);
@@ -62,6 +55,13 @@ void HandlerModule::trainData(const string &question, const string &answer){
 // trainpreddata and trainpostdata are used to store the question-answer pair into the DataMap.
 // You should call translatePreData and translatePostData to retrieve the stored answer based on the question key.
 
+// Firstly, it passes the question to the language filter if languageFilter is not a nullptr.
+// Secondly, it passes the "translated" question to the tone filter if toneFilter is not a nullptr.
+// Thirdly, it queries the inneranswer function, which find the answer within its own data.
+// If it cannot find any answer, it simply replies "Sorry, I don't know".
+// Fourthly, it passes the answer to the tone filter if toneFilter is not a nullptr.
+// Lastly, it passes the answer to the language filter if languageFilter is not a nullptr.
+
 //return answer in other language if exist.
 string HandlerModule::answer(const string &question) const{
     //question maybe "dqwnigqk"
@@ -69,21 +69,31 @@ string HandlerModule::answer(const string &question) const{
     //default (untranslated)
     string translatedQuestion = question;
 
+
+// Note that even if toneFilter is not a nullptr, it may still does nothing to your question or answer. 
+//For example, a "humor" filter will only change the tone for your answer, not the question. 
+//In the end, we aim to "ask a math joke in a foreign language, and get the reply also in foreign language".
+
     //implement language translator
     if(languageFilter!=nullptr){ //exist language translator
     //translate back to original language.
-        translatedQuestion=languageFilter->translatePreData(question);
+     
+        translatedQuestion=languageFilter->translatePreData(translatedQuestion);
     }
 
     //Secondly, it passes the "translated" question to the tone filter if toneFilter is not a nullptr.
     if(toneFilter!=nullptr){ //exist language translator
     //translate back to original language.
-        translatedQuestion=toneFilter->translatePreData(question);
+       
+        translatedQuestion=toneFilter->translatePreData(translatedQuestion);
     }
 
 
-    string ans = inneranswer(translatedQuestion); //can be "sorry idk"
-    cout <<"ori"<< ans <<endl;
+
+
+    string ans;
+    ans = inneranswer(translatedQuestion); //can be "sorry idk"
+   
 
     // if(ans=="Sorry, I don't know"){//If it cannot find any answer, it simply replies "Sorry, I don't know".
     //     return ans;
@@ -95,13 +105,13 @@ string HandlerModule::answer(const string &question) const{
 
     if(toneFilter!=nullptr){
         ans = toneFilter->translatePostData(ans); //update translate (can be unchanged)
-        cout << "toned"<<ans <<endl;
+        
     }
 
 
     if(languageFilter!=nullptr){
         ans = languageFilter->translatePostData(ans); //translate (can be unchanged)
-        cout << "langed" << ans <<endl;
+       
     }
 
     return ans;
