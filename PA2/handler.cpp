@@ -9,14 +9,16 @@
 HandlerModule::~HandlerModule(){
 
     //Remember to set pointer to nullptr after delete to avoid double free errors.
-    if(languageFilter!=nullptr){ //redundant nullptr check
-        delete languageFilter; 
-        languageFilter=nullptr;
-    }
-    if(toneFilter!=nullptr){
-        delete toneFilter;
-        toneFilter=nullptr;
-    }
+    
+    //no need , why?
+    // if(languageFilter!=nullptr){ //redundant nullptr check
+    //     delete languageFilter; 
+    //     languageFilter=nullptr;
+    // }
+    // if(toneFilter!=nullptr){
+    //     delete toneFilter;
+    //     toneFilter=nullptr;
+    // }
 }
 
 void HandlerModule::print() const {
@@ -141,7 +143,7 @@ HandlerMap::HandlerMap():arraySize(0),names(nullptr),handlerModules(nullptr){
 }
 
 HandlerMap::~HandlerMap(){
-   clear();
+    clear();
 }
 
 void HandlerMap::insert(string key, HandlerModule *value){
@@ -217,13 +219,13 @@ void HandlerMap::clear(){
 
     // ptr to array of ptr of obj.
     if(handlerModules!=nullptr){
-    
         delete[] handlerModules; //delete all dynamic ptr to obj.
-        handlerModules= nullptr;
-
+        handlerModules = nullptr;
         arraySize=0;
     }
 
     return;
 
 }
+
+

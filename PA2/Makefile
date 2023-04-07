@@ -1,4 +1,4 @@
-CPPFLAGS = -std=c++11 
+CPPFLAGS = -std=c++11 -fsanitize=address
 SRCS = main.cpp filter.cpp handler.cpp legoGPT.cpp array.cpp
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(OBJS:.o=.d)
@@ -14,7 +14,7 @@ main.exe: $(OBJS)
 -include $(DEPS)
 
 clean:
-	del *.o *.exe *.d
+	rm -f *.o *.exe *.d
 # On Windows, use: del *.o *.exe *.d
 # On Linux or MacOS, use: rm -f *.o *.exe *.d
 

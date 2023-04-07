@@ -81,10 +81,9 @@ void LegoGPT::chat(string topic, string question) const
 
 //We need to slice the humor to both FilterModule and HandlerModule. Load them into LegoGPT.
 void LegoGPT::LoadHandlerModule(HandlerModule &input){
-    
-   
+
+
    //topic is key
-   
     string topic = input.getTopic();
     
     handlerMap.insert(topic,&input);
@@ -121,17 +120,45 @@ void LegoGPT::LoadFilterModule(FilterModule &input){
 
 //Todo 7: Implement `~LegoGPT()` and `void LegoGPT:: clear()`
 LegoGPT::~LegoGPT(){ //no dynamic member
+    clear(); //just in case
 } 
 
 void LegoGPT::clear(){
     //call the robust version of clear() of other function.
-    cout << "in map" <<endl;
+
     handlerMap.clear();
-    cout << "in array" <<endl;
+  
     filterArray.clear();
-    cout << "in topic " <<endl;
+ 
     topics.clear();
-    cout << "in language" <<endl;
+  
     languages.clear();
-    cout << "clear done"<<endl;
+ 
 }
+//sanity check:
+
+// void HandlerMap::clear(){
+//     if(names!=nullptr){
+//         delete[] names;
+//         names = nullptr;
+//     }
+
+//     // ptr to array of ptr of obj.
+//     if(handlerModules!=nullptr){
+    
+//         delete[] handlerModules; //delete all dynamic ptr to obj.
+//         handlerModules = nullptr;
+//         arraySize=0;
+//     }
+
+//     return;
+
+//    void clear()
+//     {
+//         if (arraySize != 0)
+//         {
+//             arraySize = 0;
+//             delete[] array;
+//         }
+//     };
+
