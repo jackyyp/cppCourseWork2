@@ -1,5 +1,4 @@
 #include "board.h"
-#include "const.h"
 
     // private:
     //     Cell cells[BOARD_SIZE][BOARD_SIZE];
@@ -177,15 +176,17 @@ int Board::getBoardScore() const{
             else if(cells[i][j]==X){
                 XScore += score[i][j];
             }
-            else{
-                OScore+=score[i][j];
+            else if(cells[i][j]==O){
+                OScore += score[i][j];
             }
         }
     }
 
-    int multiplier = BOARD_SIZE*BOARD_SIZE/2;
+    float multiplier = (BOARD_SIZE*BOARD_SIZE)/2.0; // float division
+
+
     if(BOARD_SIZE%2==0){ //even
-        sum = XScore*(multiplier)- OScore*(multiplier);
+        sum = XScore*((BOARD_SIZE*BOARD_SIZE)/2) - OScore*((BOARD_SIZE*BOARD_SIZE)/2);
     }
     else{ //odd
         sum = XScore*(floor(multiplier)) -  OScore*(ceil(multiplier));

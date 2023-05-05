@@ -5,24 +5,24 @@
 #include <cmath>
 
 // Board size and table size. To try 4x4 mode, comment the following 2 lines and uncomment the bottom 2, then change SCORE_PRESET accordingly.
-const int BOARD_SIZE = 3;
-const int TABLE_SIZE = 101;
+// const int BOARD_SIZE = 3;
+// const int TABLE_SIZE = 101;
 
-// const int BOARD_SIZE = 4;
-// const int TABLE_SIZE = 200009;
+const int BOARD_SIZE = 4;
+const int TABLE_SIZE = 200009;
 
 // Constants representing "score of a winning player" and "illegal score".
 const int WIN_SCORE = 10000;
 const int ILLEGAL = 20000;
 
 const int SCORE_PRESET[BOARD_SIZE][BOARD_SIZE] = {
-    {4, 3, 8},
-    {9, 5, 1},
-    {2, 7, 6},
-    // {4, 14, 15, 1},
-    // {9, 7, 6, 12},
-    // {5, 11, 10, 8},
-    // {16, 2, 3, 13},
+    // {4, 3, 8},
+    // {9, 5, 1},
+    // {2, 7, 6},
+    {4, 14, 15, 1},
+    {9, 7, 6, 12},
+    {5, 11, 10, 8},
+    {16, 2, 3, 13},
 };
 
 // Default search depth

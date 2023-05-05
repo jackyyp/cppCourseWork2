@@ -60,52 +60,52 @@ void task1() {
 }
 
 void task2() {
-    // chrono::steady_clock::time_point begin = chrono::steady_clock::now();
-    // Board board{SCORE_PRESET};
-    // cout << board;
-    // cout << "Score: " << board.getBoardScore() << endl;
-    // cout << "ID: " << board.getID() << endl;
+    chrono::steady_clock::time_point begin = chrono::steady_clock::now();
+    Board board{SCORE_PRESET};
+    cout << board;
+    cout << "Score: " << board.getBoardScore() << endl;
+    cout << "ID: " << board.getID() << endl;
 
-    // BoardTree tree{board};
-    // BoardTree* currentTreeRoot = &tree;
+    BoardTree tree{board};
+    BoardTree* currentTreeRoot = &tree;
 
-    // while (true) {
-    //     BoardOptimalMove optMove = currentTreeRoot->getOptimalMove(DEPTH_PRESET);
-    //     cout << "Estimated best score: " << optMove.score << endl;
-    //     cout << "Row: " << optMove.coords.row << endl;
-    //     cout << "Col: " << optMove.coords.col << endl;
+    while (true) {
+        BoardOptimalMove optMove = currentTreeRoot->getOptimalMove(DEPTH_PRESET);
+        cout << "Estimated best score: " << optMove.score << endl;
+        cout << "Row: " << optMove.coords.row << endl;
+        cout << "Col: " << optMove.coords.col << endl;
 
-    //     board.play(optMove.coords);
-    //     currentTreeRoot = currentTreeRoot->getSubTree(optMove.coords);
-    //     cout << board;
+        board.play(optMove.coords);
+        currentTreeRoot = currentTreeRoot->getSubTree(optMove.coords);
+        cout << board;
 
-    //     int boardScore = board.getBoardScore();
-    //     cout << "Score: " << boardScore << endl;
-    //     cout << "ID: " << board.getID() << endl;
+        int boardScore = board.getBoardScore();
+        cout << "Score: " << boardScore << endl;
+        cout << "ID: " << board.getID() << endl;
 
-    //     if (boardScore == WIN_SCORE) {
-    //         cout << "Player X won!" << endl;
-    //         break;
-    //     }
-    //     else if (boardScore == -WIN_SCORE) {
-    //         cout << "Player O won!" << endl;
-    //         break;
-    //     }
-    //     else if (board.isFull()) {
-    //         if (boardScore > 0) {
-    //             cout << "Player X won!" << endl;
-    //         }
-    //         else if (boardScore < 0) {
-    //             cout << "Player O won!" << endl;
-    //         }
-    //         else {
-    //             cout << "Draw!" << endl;
-    //         }
-    //         break;
-    //     }
-    // }
-    // chrono::steady_clock::time_point end = chrono::steady_clock::now();
-    // cout << "Took " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << " milliseconds." << endl;
+        if (boardScore == WIN_SCORE) {
+            cout << "Player X won!" << endl;
+            break;
+        }
+        else if (boardScore == -WIN_SCORE) {
+            cout << "Player O won!" << endl;
+            break;
+        }
+        else if (board.isFull()) {
+            if (boardScore > 0) {
+                cout << "Player X won!" << endl;
+            }
+            else if (boardScore < 0) {
+                cout << "Player O won!" << endl;
+            }
+            else {
+                cout << "Draw!" << endl;
+            }
+            break;
+        }
+    }
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+    cout << "Took " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << " milliseconds." << endl;
 }
 
 // Expected output for this task:
@@ -115,70 +115,70 @@ void task2() {
 // Fourth call: 20000
 
 void task3() {
-    // Board board{SCORE_PRESET};
-    // if (BOARD_SIZE < 3) {
-    //     cout << "Board is too small." << endl;
-    //     return;
-    // }
-    // board.play(BoardCoordinate{0, 0});
-    // board.play(BoardCoordinate{0, 1});
-    // board.play(BoardCoordinate{1, 0});
-    // board.play(BoardCoordinate{1, 1});
-    // cout << "First call: " << BoardHashTable::getInstance().getHashedMove(board.getID(), 3).score << endl;
-    // BoardHashTable::getInstance().updateTable(board.getID(), 3, BoardOptimalMove{10000, BoardCoordinate{2, 0}});
-    // cout << "Second call: " << BoardHashTable::getInstance().getHashedMove(board.getID(), 3).score << endl;
-    // cout << "Third call: " << BoardHashTable::getInstance().getHashedMove(board.getID(), 4).score << endl;
-    // BoardHashTable::getInstance().clearTable();
-    // cout << "Fourth call: " << BoardHashTable::getInstance().getHashedMove(board.getID(), 3).score << endl;
+    Board board{SCORE_PRESET};
+    if (BOARD_SIZE < 3) {
+        cout << "Board is too small." << endl;
+        return;
+    }
+    board.play(BoardCoordinate{0, 0});
+    board.play(BoardCoordinate{0, 1});
+    board.play(BoardCoordinate{1, 0});
+    board.play(BoardCoordinate{1, 1});
+    cout << "First call: " << BoardHashTable::getInstance().getHashedMove(board.getID(), 3).score << endl;
+    BoardHashTable::getInstance().updateTable(board.getID(), 3, BoardOptimalMove{10000, BoardCoordinate{2, 0}});
+    cout << "Second call: " << BoardHashTable::getInstance().getHashedMove(board.getID(), 3).score << endl;
+    cout << "Third call: " << BoardHashTable::getInstance().getHashedMove(board.getID(), 4).score << endl;
+    BoardHashTable::getInstance().clearTable();
+    cout << "Fourth call: " << BoardHashTable::getInstance().getHashedMove(board.getID(), 3).score << endl;
 }
 
 void task4() {
-    // chrono::steady_clock::time_point begin = chrono::steady_clock::now();
-    // Board board{SCORE_PRESET};
-    // cout << board;
-    // cout << "Score: " << board.getBoardScore() << endl;
-    // cout << "ID: " << board.getID() << endl;
+    chrono::steady_clock::time_point begin = chrono::steady_clock::now();
+    Board board{SCORE_PRESET};
+    cout << board;
+    cout << "Score: " << board.getBoardScore() << endl;
+    cout << "ID: " << board.getID() << endl;
 
-    // BoardTree tree{board};
-    // BoardTree* currentTreeRoot = &tree;
+    BoardTree tree{board};
+    BoardTree* currentTreeRoot = &tree;
 
-    // while (true) {
-    //     BoardOptimalMove optMove = currentTreeRoot->getOptimalMoveAlphaBeta(DEPTH_PRESET, -WIN_SCORE-1, WIN_SCORE+1);
-    //     cout << "Estimated best score: " << optMove.score << endl;
-    //     cout << "Row: " << optMove.coords.row << endl;
-    //     cout << "Col: " << optMove.coords.col << endl;
+    while (true) {
+        BoardOptimalMove optMove = currentTreeRoot->getOptimalMoveAlphaBeta(DEPTH_PRESET, -WIN_SCORE-1, WIN_SCORE+1);
+        cout << "Estimated best score: " << optMove.score << endl;
+        cout << "Row: " << optMove.coords.row << endl;
+        cout << "Col: " << optMove.coords.col << endl;
 
-    //     board.play(optMove.coords);
-    //     currentTreeRoot = currentTreeRoot->getSubTree(optMove.coords);
-    //     cout << board;
+        board.play(optMove.coords);
+        currentTreeRoot = currentTreeRoot->getSubTree(optMove.coords);
+        cout << board;
 
-    //     int boardScore = board.getBoardScore();
-    //     cout << "Score: " << boardScore << endl;
-    //     cout << "ID: " << board.getID() << endl;
+        int boardScore = board.getBoardScore();
+        cout << "Score: " << boardScore << endl;
+        cout << "ID: " << board.getID() << endl;
 
-    //     if (boardScore == WIN_SCORE) {
-    //         cout << "Player X won!" << endl;
-    //         break;
-    //     }
-    //     else if (boardScore == -WIN_SCORE) {
-    //         cout << "Player O won!" << endl;
-    //         break;
-    //     }
-    //     else if (board.isFull()) {
-    //         if (boardScore > 0) {
-    //             cout << "Player X won!" << endl;
-    //         }
-    //         else if (boardScore < 0) {
-    //             cout << "Player O won!" << endl;
-    //         }
-    //         else {
-    //             cout << "Draw!" << endl;
-    //         }
-    //         break;
-    //     }
-    // }
-    // chrono::steady_clock::time_point end = chrono::steady_clock::now();
-    // cout << "Took " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << " milliseconds." << endl;
+        if (boardScore == WIN_SCORE) {
+            cout << "Player X won!" << endl;
+            break;
+        }
+        else if (boardScore == -WIN_SCORE) {
+            cout << "Player O won!" << endl;
+            break;
+        }
+        else if (board.isFull()) {
+            if (boardScore > 0) {
+                cout << "Player X won!" << endl;
+            }
+            else if (boardScore < 0) {
+                cout << "Player O won!" << endl;
+            }
+            else {
+                cout << "Draw!" << endl;
+            }
+            break;
+        }
+    }
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+    cout << "Took " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << " milliseconds." << endl;
 }
 
 int main() {
