@@ -44,6 +44,8 @@ unsigned int HashTable<K,V>::offset(int i, const K& key){
       return i*i;
     case DOUBLEHASH:
       return i*hash_func2(key);
+    default: //idk whats this , maybe no error then
+      return 0;
   }
 
 }
